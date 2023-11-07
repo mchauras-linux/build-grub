@@ -23,8 +23,8 @@ RUN git config --global credential.helper 'store --file=/git-credentials'
 RUN git config --global user.name "Mukesh-Chaurasiya" \
     && git config --global user.email "docker@build.com"
 
-RUN rpm -ivv *.src.rpm --define "_topdir $PWD/grub"
-# RUN rpmbuild -ba grub/SPECS/grub2.spec --define "_topdir $PWD/grub"
+RUN rpm -ivv *.src.rpm --define "_topdir $PWD"
+# RUN rpmbuild -ba grub/SPECS/grub2.spec --define "_topdir $PWD"
 
 # Set the entry point for the container
 CMD ["/bin/bash"]
