@@ -1,4 +1,3 @@
-ARG branch=docker
 # Use SUSE Linux as the base image
 FROM suse/sle15
 
@@ -11,10 +10,14 @@ RUN zypper --non-interactive in gcc autoconf automake patch gettext-tools git vi
 
 # Set the username and email for Git
 RUN git config --global credential.helper 'store --file=/git-credentials'
-RUN git config --global user.name "Mukesh-Chaurasiya" \
+RUN git config --global user.name "docker" \
     && git config --global user.email "docker@build.com"
 
-RUN git clone --single-branch --branch retry https://github.com/mchauras-linux/grub-mchauras.git
+ARG branch=docker
+ENV BRANCH=$branch
+
+RUN echo $BRANCH
+RUN git clone --single-branch --branch $BRANCH https://github.com/mchauras-linux/grub-mchauras.git
 
 RUN cd grub-mchauras && ./bootstrap && ./configure --prefix=/app/grub-mchauras/__install
 RUN cd grub-mchauras && make -j$(nproc) && make install -j$(nproc)
