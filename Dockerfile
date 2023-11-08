@@ -13,7 +13,7 @@ RUN git config --global credential.helper 'store --file=/git-credentials'
 RUN git config --global user.name "docker" \
     && git config --global user.email "docker@build.com"
 
-ARG branch=docker
+ARG branch=master
 ENV BRANCH=$branch
 
 RUN echo $BRANCH
