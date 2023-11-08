@@ -21,6 +21,7 @@ RUN git clone --single-branch --branch $BRANCH https://github.com/mchauras-linux
 
 RUN cd grub-mchauras && ./bootstrap && ./configure --prefix=/app/grub-mchauras/__install
 RUN cd grub-mchauras && make -j$(nproc) && make install -j$(nproc)
+RUN cd grub-mchauras && make check
 
 # Copy the source code from your host machine to the container
 #COPY *.src.rpm .
